@@ -15,6 +15,7 @@ class Command(BaseMakemessages):
 
     def add_arguments(self, parser):
         super(Command, self).add_arguments(parser)
+
         parser.add_argument('--yes-location', action='store_true', dest='yes_location',
                             default=False, help="Do write '#: filename:line' lines.")
         parser.add_argument('--yes-wrap', action='store_true', dest='yes_wrap',
@@ -28,9 +29,13 @@ class Command(BaseMakemessages):
 
         if len(options['apps']):
             for app in options['apps']:
+                # change the working directory to the app directory
                 module = import_module(app)
-                self.stdout.write("processing app %s\n" % app)
                 os.chdir(os.path.dirname(module.__file__))
+
+                # run base makemessages on single app
+                self.stdout.write("processing app %s\n" % app)
                 super(Command, self).handle(*args, **options)
         else:
+            # run base makemessages on full project
             super(Command, self).handle(*args, **options)
