@@ -7,7 +7,7 @@ from django.core.management.commands.makemessages import Command as BaseMakemess
 
 class Command(BaseMakemessages):
     help = '''This command inherits from the base django makemessages to default
-    to not add location lines and not wrapand allow makemessages for a single
+    to not add location lines and not wrap and allow makemessages for a single
     app or list of apps
     use --yes-location to turn location lines back on
     use --yes-wrap to turn line wrap back on
