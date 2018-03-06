@@ -23,7 +23,7 @@ class Command(BaseMakemessages):
         parser.add_argument('apps', nargs='*', choices=settings.INSTALLED_APPS + [[],])
 
     def handle(self, *args, **options):
-        self.stdout.write("running the openly makemessages command - see help for details\n")
+        self.stdout.write("running the MakeMessagesPlus command - see help for details\n")
         options['no_location'] = not options.get('yes_location')
         options['no_wrap'] = not options.get('yes_wrap')
 
