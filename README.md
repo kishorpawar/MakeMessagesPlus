@@ -1,6 +1,6 @@
 # MakeMessagesPlus
 
-Extend the django makemessages command to make it better
+We've found that the default behaviour of this command makes our diffs in pull requests large and hard to read, and we use lots of parameters to improve that, but communicating and remembering what parameters to use is hard. This project is designed to make it much simpler for our team to use the command.
 
 ## Installation
 
