@@ -17,10 +17,10 @@ class Command(BaseMakemessages):
         super(Command, self).add_arguments(parser)
 
         parser.add_argument('--yes-location', action='store_true', dest='yes_location',
-                            default=settings.ADD_LOCATION if hasattr(settings,'ADD_LOCATION') else False, 
+                            default=getattr(settings, 'ADD_LOCATION', False), 
                             help="Do write '#: filename:line' lines.")
         parser.add_argument('--yes-wrap', action='store_true', dest='yes_wrap',
-                            default=settings.DO_WRAP if hasattr(settings, 'DO_WRAP') else False, 
+                            default=getattr(settings, 'DO_WRAP', False), 
                             help="Do wrap long messages for 80 chars")
         parser.add_argument('apps', nargs='*', choices=settings.INSTALLED_APPS + [[],])
 
