@@ -21,7 +21,7 @@ class Command(BaseMakemessages):
         parser.add_argument('--yes-wrap', action='store_true', dest='yes_wrap',
                             default=False, help="Do wrap long messages for 80 chars")
         parser.add_argument('--skip', '-S', default=getattr(settings, 'IGNORE_PATTERNS', []), 
-                            dest='skip_patterns', metavar='PATTERN', action='append',   
+                            dest='skip_patterns', metavar='PATTERN', action='append',
                             help='Ignore files or directories matching this glob-style pattern. '
                  'Use multiple times to ignore more.',)
         parser.add_argument('apps', nargs='*', choices=settings.INSTALLED_APPS + [[],])
