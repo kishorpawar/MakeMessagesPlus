@@ -20,12 +20,17 @@ class Command(BaseMakemessages):
                             default=False, help="Do write '#: filename:line' lines.")
         parser.add_argument('--yes-wrap', action='store_true', dest='yes_wrap',
                             default=False, help="Do wrap long messages for 80 chars")
+        parser.add_argument('--skip', '-S', default=getattr(settings, 'IGNORE_PATTERNS', []), 
+                            dest='skip_patterns', metavar='PATTERN', action='append',   
+                            help='Ignore files or directories matching this glob-style pattern. '
+                 'Use multiple times to ignore more.',)
         parser.add_argument('apps', nargs='*', choices=settings.INSTALLED_APPS + [[],])
 
     def handle(self, *args, **options):
         self.stdout.write("running the MakeMessagesPlus command - see help for details\n")
         options['no_location'] = not options.get('yes_location')
         options['no_wrap'] = not options.get('yes_wrap')
+        options['ignore_patterns'] += options.get('skip_patterns')
 
         if len(options['apps']):
             for app in options['apps']:
