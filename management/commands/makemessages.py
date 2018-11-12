@@ -17,9 +17,11 @@ class Command(BaseMakemessages):
         super(Command, self).add_arguments(parser)
 
         parser.add_argument('--yes-location', action='store_true', dest='yes_location',
-                            default=False, help="Do write '#: filename:line' lines.")
+                            default=getattr(settings, 'ADD_LOCATION', False), 
+                            help="Do write '#: filename:line' lines.")
         parser.add_argument('--yes-wrap', action='store_true', dest='yes_wrap',
-                            default=False, help="Do wrap long messages for 80 chars")
+                            default=getattr(settings, 'DO_WRAP', False), 
+                            help="Do wrap long messages for 80 chars")
         parser.add_argument('--skip', '-S', default=getattr(settings, 'IGNORE_PATTERNS', []), 
                             dest='skip_patterns', metavar='PATTERN', action='append',
                             help='Ignore files or directories matching this glob-style pattern. '
