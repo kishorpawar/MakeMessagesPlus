@@ -24,6 +24,9 @@ class Command(BaseMakemessages):
                             dest='skip_patterns', metavar='PATTERN', action='append',
                             help='Ignore files or directories matching this glob-style pattern. '
                  'Use multiple times to ignore more.',)
+        parser.add_argument('--yes-obsolete', action='store_true', dest='yes_obsolete',
+                            default=getattr(settings, 'KEEP_OBSOLETE', False), 
+                            help="Keep obsolete messages.")
         parser.add_argument('apps', nargs='*', choices=settings.INSTALLED_APPS + [[],])
 
     def handle(self, *args, **options):
@@ -31,6 +34,7 @@ class Command(BaseMakemessages):
         options['no_location'] = not options.get('yes_location')
         options['no_wrap'] = not options.get('yes_wrap')
         options['ignore_patterns'] += options.get('skip_patterns')
+        options['no_obsolete'] = not options.get('yes_obsolete')
 
         if len(options['apps']):
             for app in options['apps']:
